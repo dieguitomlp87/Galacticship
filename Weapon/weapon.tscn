@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://ch2pwbwjhtf28"]
+
+[ext_resource type="Script" uid="uid://cif776hkw8o2c" path="res://Weapon/weapon.gd" id="1_lfpbp"]
+[ext_resource type="PackedScene" uid="uid://csmemk4xdaeac" path="res://bullet/bullet.tscn" id="2_4447s"]
+
+[node name="Weapon" type="Node2D"]
+script = ExtResource("1_lfpbp")
+bullet_scene = ExtResource("2_4447s")
+bullet_scale = 0.2

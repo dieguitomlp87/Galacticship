@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnuajvetqf2gt"]
+
+[ext_resource type="Script" uid="uid://cgfsuouhtolia" path="res://EnemySpawner/enemy_spawner.gd" id="1_m0m3j"]
+[ext_resource type="PackedScene" uid="uid://cgdqbuggc7t66" path="res://Ship/ship.tscn" id="2_26bmk"]
+[ext_resource type="PackedScene" uid="uid://ds5x2jvygo2jt" path="res://BigShip/big_ship.tscn" id="3_m0m3j"]
+
+[node name="EnemySpawner" type="Node2D"]
+script = ExtResource("1_m0m3j")
+enemy_scenes = Array[PackedScene]([ExtResource("2_26bmk")])
+enemy_scenes_bigship = Array[PackedScene]([ExtResource("3_m0m3j")])

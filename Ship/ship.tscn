@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://cgdqbuggc7t66"]
+
+[ext_resource type="Texture2D" uid="uid://cpfpydnwpq42s" path="res://Imagenes/Enemies/Enemy_A_001.png" id="1_1p84g"]
+[ext_resource type="Script" uid="uid://ggw8mujopg37" path="res://Ship/ship.gd" id="1_q4ev1"]
+[ext_resource type="PackedScene" uid="uid://ch2pwbwjhtf28" path="res://Weapon/weapon.tscn" id="3_edrfk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q4ev1"]
+size = Vector2(42, 36)
+
+[node name="Ship" type="CharacterBody2D"]
+visibility_layer = 2
+script = ExtResource("1_q4ev1")
+speed_y = 40.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -6)
+shape = SubResource("RectangleShape2D_q4ev1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("1_1p84g")
+
+[node name="Weapon" parent="." instance=ExtResource("3_edrfk")]
+bullet_scale = 0.1
+bullet_speed = 180
+fire_mode = 3
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]

@@ -1,0 +1,75 @@
+[gd_scene load_steps=9 format=3 uid="uid://qb7kkyt013yp"]
+
+[ext_resource type="Texture2D" uid="uid://3i11803qgj0g" path="res://Imagenes/Universo/Universo_004.png" id="1_rj11h"]
+[ext_resource type="PackedScene" uid="uid://dj7222ppq5n8f" path="res://PlayerScene/player.tscn" id="2_liyct"]
+[ext_resource type="Script" uid="uid://eenuoltvmbkm" path="res://Main/background.gd" id="2_qac2q"]
+[ext_resource type="PackedScene" uid="uid://d14vtd0a616l8" path="res://Stars/stars.tscn" id="2_rj11h"]
+[ext_resource type="PackedScene" uid="uid://bnuajvetqf2gt" path="res://EnemySpawner/enemy_spawner.tscn" id="4_eunhr"]
+[ext_resource type="Script" uid="uid://dm2ltxdleaw37" path="res://Main/score_label.gd" id="8_f6fdm"]
+[ext_resource type="Script" uid="uid://b01e04o61kl13" path="res://Main/player_life_bar.gd" id="9_rj11h"]
+[ext_resource type="PackedScene" uid="uid://c0h6g2ods7dgt" path="res://PauseMenu/pause_menu.tscn" id="11_o60nc"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+scale = Vector2(1, 2)
+script = ExtResource("2_qac2q")
+background_speed = 20
+
+[node name="BG1" type="Sprite2D" parent="Background"]
+position = Vector2(180, 0)
+texture = ExtResource("1_rj11h")
+
+[node name="BG2" type="Sprite2D" parent="Background"]
+position = Vector2(180, -700)
+rotation = 3.1415927
+texture = ExtResource("1_rj11h")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -114.0
+offset_bottom = 37.0
+grow_horizontal = 0
+script = ExtResource("8_f6fdm")
+
+[node name="PlayerLifeBar" type="ProgressBar" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -53.5
+offset_right = 53.5
+offset_bottom = 27.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+script = ExtResource("9_rj11h")
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("11_o60nc")]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -340.0
+offset_bottom = -300.0
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="Stars" parent="." instance=ExtResource("2_rj11h")]
+visible = true
+
+[node name="Player" parent="." instance=ExtResource("2_liyct")]
+z_index = 1
+position = Vector2(180, 620)
+
+[node name="EnemySpawner" parent="." node_paths=PackedStringArray("timer_ship", "timer_bigship") instance=ExtResource("4_eunhr")]
+timer_ship = NodePath("SpawnShip")
+timer_bigship = NodePath("SpawnBigShip")
+
+[node name="SpawnShip" type="Timer" parent="EnemySpawner"]
+autostart = true
+
+[node name="SpawnBigShip" type="Timer" parent="EnemySpawner"]
+wait_time = 5.0
+autostart = true

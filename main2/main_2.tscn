@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://de8sd3elwoj56"]
+
+[ext_resource type="Script" uid="uid://bpvjesgf1c12j" path="res://main2/main_2.gd" id="1_b8r6l"]
+[ext_resource type="PackedScene" uid="uid://cgdqbuggc7t66" path="res://Ship/ship.tscn" id="2_a4jyx"]
+[ext_resource type="PackedScene" uid="uid://dj7222ppq5n8f" path="res://PlayerScene/player.tscn" id="3_a4jyx"]
+
+[node name="Main2" type="Node2D"]
+script = ExtResource("1_b8r6l")
+
+[node name="Ship" parent="." instance=ExtResource("2_a4jyx")]
+
+[node name="Player" parent="." instance=ExtResource("3_a4jyx")]
+position = Vector2(180, 630)

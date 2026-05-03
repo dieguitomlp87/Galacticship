@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://div1qcunluesd"]
+
+[ext_resource type="Script" uid="uid://2y35trreijyr" path="res://CannonDoule/cannon_double.gd" id="1_bu2es"]
+[ext_resource type="Texture2D" uid="uid://ddbkcsxruypno" path="res://Imagenes/Cannon/CannonDouble.png" id="2_0xu1i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_erap4"]
+size = Vector2(64, 47)
+
+[node name="CannonDouble" type="Area2D"]
+script = ExtResource("1_bu2es")
+metadata/_custom_type_script = "uid://bwrqvvf66ijkx"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_0xu1i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4.5)
+shape = SubResource("RectangleShape2D_erap4")

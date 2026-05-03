@@ -1,0 +1,78 @@
+[gd_scene load_steps=13 format=3 uid="uid://dj7222ppq5n8f"]
+
+[ext_resource type="Script" uid="uid://bafuau57qtuo1" path="res://PlayerScene/player.gd" id="1_2qdwb"]
+[ext_resource type="Texture2D" uid="uid://d1dgimu3yle37" path="res://Imagenes/Player/Nave_A_01.png" id="3_6mj8h"]
+[ext_resource type="Texture2D" uid="uid://b871ku0pymyvx" path="res://Imagenes/Enemies/Explosion/Explosion_Nave_005.png" id="3_vbg2j"]
+[ext_resource type="Texture2D" uid="uid://blqkf6mnuvht8" path="res://Imagenes/Enemies/Explosion/Explosion_Nave_001.png" id="4_gircc"]
+[ext_resource type="Texture2D" uid="uid://d3nnfqbsx3ryx" path="res://Imagenes/Player/Nave_A_02.png" id="4_v6ces"]
+[ext_resource type="Texture2D" uid="uid://bxyien2crhpne" path="res://Imagenes/Player/Nave_A_03.png" id="5_gwk6y"]
+[ext_resource type="Texture2D" uid="uid://cpn3x4rcom43j" path="res://Imagenes/Enemies/Explosion/Explosion_Nave_002.png" id="5_v2080"]
+[ext_resource type="Texture2D" uid="uid://dphxvh4m7oj6m" path="res://Imagenes/Enemies/Explosion/Explosion_Nave_004.png" id="6_1t3ax"]
+[ext_resource type="Texture2D" uid="uid://crx6qdx03ntf6" path="res://Imagenes/Player/Nave_A_04.png" id="6_apvdr"]
+[ext_resource type="Texture2D" uid="uid://chi2dj2vs8vrl" path="res://Imagenes/Enemies/Explosion/Explosion_Nave_006.png" id="7_ukrsj"]
+[ext_resource type="PackedScene" uid="uid://ch2pwbwjhtf28" path="res://Weapon/weapon.tscn" id="12_gircc"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2qdwb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_vbg2j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_gircc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_v2080")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_1t3ax")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_vbg2j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ukrsj")
+}],
+"loop": false,
+"name": &"explosion",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": ExtResource("3_6mj8h")
+}, {
+"duration": 0.5,
+"texture": ExtResource("4_v6ces")
+}, {
+"duration": 0.5,
+"texture": ExtResource("5_gwk6y")
+}, {
+"duration": 0.5,
+"texture": ExtResource("6_apvdr")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+visibility_layer = 2
+scale = Vector2(3, 3)
+script = ExtResource("1_2qdwb")
+speed = 300
+shoot_cooldown = 0.3
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_2qdwb")
+animation = &"idle"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-1, -8, 1, -8, 2, -4, 3, 0, 5, 0, 6, -2, 7, -2, 8, 0, 8, 5, -8, 5, -8, 0, -7, -2, -6, -2, -5, 0, -3, 0, -3, -4)
+
+[node name="Weapon" parent="." instance=ExtResource("12_gircc")]
+bullet_scale = 0.1
+bullet_speed = 300
+shoot_direction = Vector2(0, -1)
+team = 0
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

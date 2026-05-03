@@ -1,0 +1,95 @@
+[gd_scene load_steps=13 format=3 uid="uid://cr6eoo36pr62v"]
+
+[ext_resource type="Script" uid="uid://b837xccrt1mv" path="res://MainMenu/main_menu.gd" id="1_nhkf3"]
+[ext_resource type="Texture2D" uid="uid://du5v18nyp0f70" path="res://Imagenes/Background/BackgroundMenuJuegoNaves.png" id="2_3w4mj"]
+[ext_resource type="Texture2D" uid="uid://ck3pnw74ew4k2" path="res://Imagenes/Background/BackgroundTituloNaves_01.png" id="3_5de1l"]
+[ext_resource type="Texture2D" uid="uid://vjs50o3i5pyd" path="res://Imagenes/Button/ButtonPlay_01.png" id="3_po2gx"]
+[ext_resource type="Texture2D" uid="uid://bjmpfohuydh3j" path="res://Imagenes/Button/ButtoPlay_03.png" id="4_jdgnk"]
+[ext_resource type="Texture2D" uid="uid://7jl3w486yeum" path="res://Imagenes/Button/ButtonExit_01.png" id="4_kbpwf"]
+[ext_resource type="Texture2D" uid="uid://bypk5a2y5i0qt" path="res://Imagenes/Button/ButtoPlay_02.png" id="5_r0x8f"]
+[ext_resource type="Texture2D" uid="uid://dxljjg8gh57s4" path="res://Imagenes/Button/ButtonExit_03.png" id="7_83n0s"]
+[ext_resource type="Texture2D" uid="uid://bvs2p70o4g00o" path="res://Imagenes/Button/ButtonExit_02t.png" id="8_8n28k"]
+
+[sub_resource type="Animation" id="Animation_ajn5b"]
+resource_name = "Play"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D2:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.02, 0.05), Vector2(0.3, 0.75)]
+}
+
+[sub_resource type="Animation" id="Animation_po2gx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D2:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 2.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kbpwf"]
+_data = {
+&"Play": SubResource("Animation_ajn5b"),
+&"RESET": SubResource("Animation_po2gx")
+}
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_nhkf3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_3w4mj")
+centered = false
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_top = 30.0
+offset_right = 360.0
+offset_bottom = 670.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = -60
+
+[node name="PlayButton" type="TextureButton" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_po2gx")
+texture_pressed = ExtResource("4_jdgnk")
+texture_hover = ExtResource("5_r0x8f")
+
+[node name="ExitButton" type="TextureButton" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("4_kbpwf")
+texture_pressed = ExtResource("7_83n0s")
+texture_hover = ExtResource("8_8n28k")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(180, 180)
+scale = Vector2(1, 2.5)
+texture = ExtResource("3_5de1l")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_kbpwf")
+}
+autoplay = "Play"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
