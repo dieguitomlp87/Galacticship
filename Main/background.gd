@@ -9,7 +9,7 @@ extends Node2D
 func _ready() -> void:
 	bg_1.position.y = 0
 	bg_2.position.y = -700
-	
+	print("puto el que mensa")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
